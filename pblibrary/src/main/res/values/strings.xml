@@ -1,0 +1,71 @@
+<resources>
+    <string name="wifi_enabled" translatable="false">Wifi enabled</string>
+    <string name="mobiledata_enabled" translatable="false">Mobile data enabled</string>
+    <string name="not_connected" translatable="false">Not connected to Internet</string>
+    <string name="select_picture" translatable="false">Select Picture</string>
+    <string name="device_switched_on" translatable="false">Device Switched On</string>
+    <string name="device_switched_off" translatable="false">Device Switched Off</string>
+
+    <string name="login" translatable="false">Login</string>
+    <string name="register" translatable="false">Register</string>
+    <string name="logout" translatable="false">Logout</string>
+    <string name="sign_in" translatable="false">Sign In</string>
+    <string name="sign_up" translatable="false">Sign Up</string>
+    <string name="sign_out" translatable="false">Sign Out</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="forgot_password" translatable="false">Forgot Password</string>
+    <string name="reset_password" translatable="false">Reset Password</string>
+    <string name="recover_account" translatable="false">Recover Account</string>
+    <string name="sample_email" translatable="false">someone@example.com</string>
+    <string name="sample_pwd" translatable="false">*********</string>
+    <string name="first_name" translatable="false">First Name</string>
+    <string name="last_name" translatable="false">Last Name</string>
+    <string name="username" translatable="false">Username</string>
+    <string name="mobile_number" translatable="false">Mobile Number</string>
+    <string name="tandc_text" translatable="false">I accept the terms and conditions</string>
+    <string name="submit" translatable="false">Submit</string>
+    <string name="skip" translatable="false">Skip</string>
+    <string name="next" translatable="false">Next</string>
+    <string name="done" translatable="false">Done</string>
+    <string name="okay" translatable="false">Okay</string>
+    <string name="cancel" translatable="false">Cancel</string>
+    <string name="filter" translatable="false">Filter</string>
+    <string name="profile" translatable="false">Profile</string>
+    <string name="settings" translatable="false">Settings</string>
+    <string name="current_password" translatable="false">Current Password</string>
+    <string name="new_password" translatable="false">New Password</string>
+    <string name="confirm_password" translatable="false">Confirm Password</string>
+    <string name="about_us" translatable="false">About Us</string>
+    <string name="contact_us" translatable="false">Contact Us</string>
+    <string name="privacy_policy" translatable="false">Privacy Policy</string>
+    <string name="change_password" translatable="false">Change Password</string>
+
+    <string name="empty_mobile_num" translatable="false">Please provide mobile number</string>
+    <string name="empty_first_name" translatable="false">Please provide first name</string>
+    <string name="empty_last_name" translatable="false">Please provide last name</string>
+    <string name="empty_username" translatable="false">Please provide username</string>
+    <string name="empty_current_password" translatable="false">Please provide current password</string>
+    <string name="empty_new_password" translatable="false">Please provide new password</string>
+    <string name="empty_password" translatable="false">Please provide password</string>
+    <string name="empty_confirm_password" translatable="false">Please provide confirm password</string>
+    <string name="empty_otp" translatable="false">Please provide OTP</string>
+    <string name="empty_email" translatable="false">Please provide email address</string>
+    <string name="empty_pincode" translatable="false">Please provide pin code</string>
+
+    <string name="invalid_email" translatable="false">Please provide valid email address</string>
+    <string name="invalid_otp" translatable="false">Please provide valid OTP</string>
+    <string name="invalid_accept_tc" translatable="false">Please accept terms and conditions</string>
+    <string name="invalid_conf_pwd" translatable="false">Password and confirm password must be same</string>
+    <string name="invalid_pwd" translatable="false">Password must contain at least %d characters, including uppercase,
+        lowercase letters and numbers.
+    </string>
+    <string name="invalid_username" translatable="false">Username atleast %d characters</string>
+    <string name="invalid_last_name" translatable="false">Last name must contains text only</string>
+    <string name="invalid_first_name" translatable="false">First name must contains text only</string>
+    <string name="invalid_mobile_num" translatable="false">Please provide valid mobile number</string>
+    <string name="invalid_pincode" translatable="false">Please provide valid pin code</string>
+
+    <string name="must_login" translatable="false">You must login to continue</string>
+
+</resources>
