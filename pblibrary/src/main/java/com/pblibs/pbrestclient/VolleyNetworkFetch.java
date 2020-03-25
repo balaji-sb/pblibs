@@ -1,6 +1,7 @@
 package com.pblibs.pbrestclient;
 
 import android.content.Context;
+
 import com.android.volley.AuthFailureError;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -9,6 +10,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.pblibs.pbinterfaces.PBNetworkCallback;
 import com.pblibs.utility.PBConstants;
+import com.pblibs.utility.PBSessionManager;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -70,7 +73,13 @@ public class VolleyNetworkFetch {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put(PBConstants.CONTENT_TYPE, PBConstants.URL_ENCODED_TYPE);
+                String contentType = PBSessionManager.getInstance().getString(PBConstants.CONTENT_TYPE,
+                        PBConstants.URL_ENCODED_TYPE);
+                params.put(PBConstants.CONTENT_TYPE, contentType);
+                String token = PBSessionManager.getInstance().getString(PBConstants.TOKEN, "");
+                if (!token.isEmpty() && !token.equals("null")) {
+                    params.put(PBConstants.AUTHORIZATION, "Bearer " + token);
+                }
                 return params;
             }
         };
@@ -104,7 +113,13 @@ public class VolleyNetworkFetch {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put(PBConstants.CONTENT_TYPE, PBConstants.URL_ENCODED_TYPE);
+                String contentType = PBSessionManager.getInstance().getString(PBConstants.CONTENT_TYPE,
+                        PBConstants.URL_ENCODED_TYPE);
+                params.put(PBConstants.CONTENT_TYPE, contentType);
+                String token = PBSessionManager.getInstance().getString(PBConstants.TOKEN, "");
+                if (!token.isEmpty() && !token.equals("null")) {
+                    params.put(PBConstants.AUTHORIZATION, "Bearer " + token);
+                }
                 return params;
             }
         };
@@ -137,7 +152,13 @@ public class VolleyNetworkFetch {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put(PBConstants.CONTENT_TYPE, PBConstants.URL_ENCODED_TYPE);
+                String contentType = PBSessionManager.getInstance().getString(PBConstants.CONTENT_TYPE,
+                        PBConstants.URL_ENCODED_TYPE);
+                params.put(PBConstants.CONTENT_TYPE, contentType);
+                String token = PBSessionManager.getInstance().getString(PBConstants.TOKEN, "");
+                if (!token.isEmpty() && !token.equals("null")) {
+                    params.put(PBConstants.AUTHORIZATION, "Bearer " + token);
+                }
                 return params;
             }
         };

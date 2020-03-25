@@ -12,12 +12,12 @@ import com.pblibs.pbinterfaces.LogoutCallback;
 public class PBSessionManager {
 
     private static PBSessionManager mInstance;
-    private SharedPreferences mPreference;
-    private SharedPreferences.Editor mEditor;
+    private static SharedPreferences mPreference;
+    private static SharedPreferences.Editor mEditor;
     private Context mContext;
     private PBUtils mPbUtils;
 
-    PBSessionManager() {
+    private PBSessionManager() {
         mContext = PBApplication.getInstance().getContext();
         mPbUtils = PBUtils.getInstance();
         mPreference = mContext.getSharedPreferences(PBConstants.PREF_NAME, PBConstants.PRIVATE_MODE);
@@ -41,7 +41,7 @@ public class PBSessionManager {
      * @return
      */
 
-    public boolean isFirstTimeLaunch() {
+    public static boolean isFirstTimeLaunch() {
         return mPreference.getBoolean(PBConstants.IS_FIRST_TIME_LAUNCH, true);
     }
 
@@ -51,7 +51,7 @@ public class PBSessionManager {
      * @param isFirstTime
      */
 
-    public void setFirstTimeLaunch(boolean isFirstTime) {
+    public static void setFirstTimeLaunch(boolean isFirstTime) {
         mEditor.putBoolean(PBConstants.IS_FIRST_TIME_LAUNCH, isFirstTime);
         mEditor.commit();
     }
@@ -62,7 +62,7 @@ public class PBSessionManager {
      * @return
      */
 
-    public boolean isUserLoggedIn() {
+    public static boolean isUserLoggedIn() {
         if (getUserId().isEmpty() || getUserId().trim().length() == 0) {
             return false;
         }
@@ -75,7 +75,7 @@ public class PBSessionManager {
      * @return
      */
 
-    public String getUserId() {
+    public static String getUserId() {
         return mPreference.getString(PBConstants.USER_ID, "");
     }
 
@@ -85,10 +85,78 @@ public class PBSessionManager {
      * @param callback
      */
 
-    public void logoutUser(LogoutCallback callback) {
+    public static void logoutUser(LogoutCallback callback) {
         mEditor.clear();
         mEditor.commit();
         callback.onLogoutSuccess();
+    }
+
+    /**
+     * set the string param with value
+     */
+
+    public static void setString(String key, String value) {
+        mEditor.putString(key, value);
+        mEditor.commit();
+    }
+
+    /**
+     * set the string param with value
+     */
+
+    public static String getString(String key, String defaultValue) {
+        return mPreference.getString(key, defaultValue);
+    }
+
+    /**
+     * set the float param with value
+     */
+
+    public static void setFloat(String key, float value) {
+        mEditor.putFloat(key, value);
+        mEditor.commit();
+    }
+
+    /**
+     * set the string param with value
+     */
+
+    public static float getFloat(String key, float defaultValue) {
+        return mPreference.getFloat(key, defaultValue);
+    }
+
+    /**
+     * set the boolean param with value
+     */
+
+    public static void setBoolean(String key, boolean value) {
+        mEditor.putBoolean(key, value);
+        mEditor.commit();
+    }
+
+    /**
+     * get the boolean param with value
+     */
+
+    public static boolean getBoolean(String key, boolean defaultValue) {
+        return mPreference.getBoolean(key, defaultValue);
+    }
+
+    /**
+     * set the int param with value
+     */
+
+    public static void setInt(String key, int value) {
+        mEditor.putInt(key, value);
+        mEditor.commit();
+    }
+
+    /**
+     * get the int param with value
+     */
+
+    public static int getInt(String key, int defaultValue) {
+        return mPreference.getInt(key, defaultValue);
     }
 
 }

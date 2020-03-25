@@ -6,6 +6,14 @@
     <string name="device_switched_on" translatable="false">Device Switched On</string>
     <string name="device_switched_off" translatable="false">Device Switched Off</string>
 
+    <string name="home" translatable="false">Home</string>
+    <string name="menu" translatable="false">Menu</string>
+    <string name="share" translatable="false">Share</string>
+    <string name="open" translatable="false">Open</string>
+    <string name="close" translatable="false">Close</string>
+    <string name="yes" translatable="false">Yes</string>
+    <string name="no" translatable="false">No</string>
+
     <string name="login" translatable="false">Login</string>
     <string name="register" translatable="false">Register</string>
     <string name="logout" translatable="false">Logout</string>
@@ -14,7 +22,8 @@
     <string name="sign_out" translatable="false">Sign Out</string>
     <string name="email" translatable="false">Email</string>
     <string name="password" translatable="false">Password</string>
-    <string name="forgot_password" translatable="false">Forgot Password</string>
+    <string name="forgot_password" translatable="false">Forgot Password?</string>
+    <string name="forgot_password_title" translatable="false">Forgot Password</string>
     <string name="reset_password" translatable="false">Reset Password</string>
     <string name="recover_account" translatable="false">Recover Account</string>
     <string name="sample_email" translatable="false">someone@example.com</string>

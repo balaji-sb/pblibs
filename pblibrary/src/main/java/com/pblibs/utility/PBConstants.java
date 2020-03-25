@@ -8,6 +8,7 @@ public class PBConstants {
     public static final String ALGORITHM_MD5 = "MD5";
     public static final String UNKNOWN_ERROR = "Unknown Error";
     public static final String BACK_SLASH = "/";
+    public static final String FORWARD_SLASH = "\\";
     public static final String UNDER_SCORE = "_";
     public static final String SYMBOL_EQUALS = " = ";
     public static final String IMAGE = "image";
@@ -39,11 +40,19 @@ public class PBConstants {
     public static final String DATE_FORMAT_2 = "yyyyMMdd";
     public static final String IMEI = "IMEI";
     public static final String TIME = "Time";
-    public static final String MESSAGE = "Message";
+    public static final String MESSAGE = "message";
+    public static final String SUCCESS = "success";
+    public static final String STATUS = "status";
+    public static final String IS_DARK_MODE = "isDarkMode";
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String URL_ENCODED_TYPE = "application/x-www-form-urlencoded";
     public static final String IS_FIRST_TIME_LAUNCH = "is_first_time_launch";
+    public static final String AUTHORIZATION = "Authorization";
+    public static final String APPLICATION_JSON = "application/json";
+    public static final String TOKEN = "token";
     public static final String USER_ID = "user_id";
+    public static final String LATITUDE = "latitude";
+    public static final String LONGITUDE = "longitude";
 
     private PBConstants() {
         //do nothing

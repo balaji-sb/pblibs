@@ -5,7 +5,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
+
 import com.pblibs.base.PBApplication;
 import com.pblibs.pbinterfaces.NextActionCallback;
 
@@ -33,8 +35,8 @@ public class PBAlertWidgets {
      */
 
     public void showAlertDialog(Context context, String title, String message, int icon, String positiveText,
-                                String negativeText, final NextActionCallback callback) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                                String negativeText, final NextActionCallback callback, int theme) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context,theme);
         builder.setTitle(title);
         builder.setMessage(message);
         builder.setIcon(icon);
@@ -42,15 +44,13 @@ public class PBAlertWidgets {
         builder.setPositiveButton(positiveText, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                callback.onPositiveClick();
-                dialogInterface.dismiss();
+                callback.onPositiveClick(dialogInterface);
             }
         });
         builder.setNegativeButton(negativeText, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                callback.onNegativeClick();
-                dialogInterface.dismiss();
+                callback.onNegativeClick(dialogInterface);
             }
         });
         builder.show();

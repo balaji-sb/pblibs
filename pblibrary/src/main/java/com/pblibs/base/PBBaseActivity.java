@@ -17,6 +17,8 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +28,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.pblibrary.proggyblast.BuildConfig;
 import com.pblibrary.proggyblast.R;
 import com.pblibs.utility.GenericModel;
@@ -43,6 +46,7 @@ public class PBBaseActivity extends AppCompatActivity {
     private static final int SETTINGS_CODE = 117;
     private static final int REQUEST_CAPTURE_IMAGE = 1001;
     private static final int REQUEST_PICK_IMAGE = 1002;
+    public static boolean isPermissionGranted = false;
     public Context mContext;
     public View mView;
     public PBSessionManager mPbSessionManager;
@@ -87,15 +91,17 @@ public class PBBaseActivity extends AppCompatActivity {
      * @param redirectClassName
      */
 
-    public void navigateActivity(String redirectClassName) {
+    public void navigateActivity(String redirectClassName, boolean isNewActivity) {
         try {
-            Class aClass = Class.forName(redirectClassName);
+            Class aClass = Class.forName(mContext.getPackageName() + "." + redirectClassName.trim());
             Intent intent = new Intent(PBApplication.getInstance().getContext(), aClass);
+            if (isNewActivity) {
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            }
             PBApplication.getInstance().getContext().startActivity(intent);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -245,6 +251,21 @@ public class PBBaseActivity extends AppCompatActivity {
 
     public void navigateToPrevious() {
         ((FragmentActivity) mContext).getSupportFragmentManager().popBackStackImmediate();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        for (int i = 0; i < grantResults.length; i++) {
+            if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
+                isPermissionGranted = true;
+            }
+        }
+        if (!isPermissionGranted) {
+            askPermission(permissions);
+        }
     }
 
 }

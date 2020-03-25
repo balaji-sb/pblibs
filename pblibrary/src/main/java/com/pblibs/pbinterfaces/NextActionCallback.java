@@ -6,8 +6,8 @@ package com.pblibs.pbinterfaces;
 
 public interface NextActionCallback {
 
-    void onPositiveClick();
+    void onPositiveClick(Object o);
 
-    void onNegativeClick();
+    void onNegativeClick(Object o);
 
 }

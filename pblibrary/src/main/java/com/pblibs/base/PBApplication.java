@@ -9,7 +9,7 @@ import android.content.Context;
 
 public class PBApplication extends Application {
 
-    public static final String TAG = "ProggyBlast";
+    public static final String TAG = PBApplication.class.getSimpleName();
     public static PBApplication mInstance;
     private Context mContext;
     private String mAppName;

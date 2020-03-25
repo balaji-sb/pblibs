@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.os.ParcelFileDescriptor;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -460,5 +461,39 @@ public class PBFileOperations {
             }
         }
         return isAppend;
+    }
+
+    /**
+     *  Get File by descriptor
+     *  Specially for Android Q to use with retrieve audio file information.
+     * @param uri
+     * @param fileName
+     * @return
+     */
+
+
+    public File getFileByDescriptor(Uri uri, String fileName) {
+        if (uri == null)
+            return null;
+        FileInputStream input = null;
+        FileOutputStream output = null;
+        String filePath = new File(mContext.getCacheDir(), fileName).getAbsolutePath();
+        try {
+            ParcelFileDescriptor pfd = mContext.getContentResolver().openFileDescriptor(uri, "r");
+            if (pfd == null)
+                return null;
+            FileDescriptor fd = pfd.getFileDescriptor();
+            input = new FileInputStream(fd);
+            output = new FileOutputStream(filePath);
+            int read;
+            byte[] bytes = new byte[4096];
+            while ((read = input.read(bytes)) != -1) {
+                output.write(bytes, 0, read);
+            }
+            return new File(filePath);
+        } catch (IOException ignored) {
+            ignored.printStackTrace();
+            return null;
+        }
     }
 }

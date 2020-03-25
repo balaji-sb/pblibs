@@ -10,7 +10,16 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
-import android.graphics.*;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
+import android.graphics.Paint;
+import android.graphics.Point;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Build;
@@ -24,22 +33,37 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+
 import androidx.core.content.ContextCompat;
+
+
 import com.pblibs.base.PBApplication;
 
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+import java.util.UnknownFormatConversionException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static com.pblibs.utility.PBConstants.*;
+import static com.pblibs.utility.PBConstants.ALGORITHM_MD5;
+import static com.pblibs.utility.PBConstants.DATE_FORMAT_2;
+import static com.pblibs.utility.PBConstants.EMPTY;
+import static com.pblibs.utility.PBConstants.NUM_PATTERN;
+import static com.pblibs.utility.PBConstants.ONE;
+import static com.pblibs.utility.PBConstants.PSWD_PATTERN;
+import static com.pblibs.utility.PBConstants.TEXT_PATTERN;
+import static com.pblibs.utility.PBConstants.TWO;
+import static com.pblibs.utility.PBConstants.UNKNOWN_ERROR;
+import static com.pblibs.utility.PBConstants.ZERO;
+
 
 public class PBUtils {
 
@@ -113,12 +137,17 @@ public class PBUtils {
         if (password == null || password.isEmpty()) {
             return ZERO;
         } else {
-            String pwdPattern = String.format(PSWD_PATTERN, length);
-            Matcher lMatcher = Pattern.compile(pwdPattern).matcher(password);
-            if (lMatcher.matches()) {
+            try {
+                //String pwdPattern = String.format(Locale.US,PSWD_PATTERN, length);
+                Matcher lMatcher = Pattern.compile(PSWD_PATTERN).matcher(password);
+                if (lMatcher.matches()) {
+                    return ONE;
+                } else {
+                    return TWO;
+                }
+            } catch (UnknownFormatConversionException e) {
+                Log.e("Excepis", e.getConversion());
                 return ONE;
-            } else {
-                return TWO;
             }
         }
     }
@@ -423,7 +452,10 @@ public class PBUtils {
         ActivityManager activityManager = (ActivityManager) mContext.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> tasks = activityManager.getRunningTasks(1);
         if (!tasks.isEmpty()) {
-            ComponentName topActivity = tasks.get(0).topActivity;
+            ComponentName topActivity = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+                topActivity = tasks.get(0).topActivity;
+            }
             if (!topActivity.getPackageName().equals(mContext.getPackageName())) {
                 return true;
             }
@@ -522,7 +554,7 @@ public class PBUtils {
      */
 
     public String format2Digit(int num) {
-        DecimalFormat format = new DecimalFormat("#0");
+        DecimalFormat format = new DecimalFormat("00");
         return format.format(num);
     }
 
@@ -553,6 +585,15 @@ public class PBUtils {
         System.gc();
     }
 
+    /**
+     * Generate PDF with array of bitmaps
+     *
+     * @param bitmaps
+     * @param pageWidth
+     * @param pageHeight
+     * @param bgcolor
+     */
+
     @TargetApi(Build.VERSION_CODES.KITKAT)
     public void generatePDF(Bitmap[] bitmaps, int pageWidth, int pageHeight, int bgcolor) {
         PdfDocument document = new PdfDocument();
@@ -568,6 +609,22 @@ public class PBUtils {
             canvas.drawBitmap(bitmap, 50f, 50f, null);
             document.finishPage(page);
         }
+    }
+
+    /**
+     * Check if dark theme is enabled or not
+     * @param context
+     * @return
+     */
+
+    public static boolean isDarkTheme(Context context) {
+        boolean isDarkMode = false;
+        switch (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                isDarkMode = true;
+                break;
+        }
+        return isDarkMode;
     }
 
 }
