@@ -5,6 +5,7 @@ import com.pblibs.base.PBApplication;
 public class PBConstants {
 
     public static final String EMPTY = "";
+    public static final String DEFAULT = "~default~";
     public static final String ALGORITHM_MD5 = "MD5";
     public static final String UNKNOWN_ERROR = "Unknown Error";
     public static final String BACK_SLASH = "/";

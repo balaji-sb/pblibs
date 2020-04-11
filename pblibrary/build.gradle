@@ -24,6 +24,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
 
 }
 
@@ -42,6 +45,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.2.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    testImplementation 'org.mockito:mockito-core:2.7.22'
 }
 repositories {
     mavenCentral()

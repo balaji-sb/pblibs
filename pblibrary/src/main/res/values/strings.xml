@@ -50,6 +50,8 @@
     <string name="privacy_policy" translatable="false">Privacy Policy</string>
     <string name="change_password" translatable="false">Change Password</string>
 
+    <string name="empty_url" translatable="false">Please provide url</string>
+    <string name="empty_name" translatable="false">Please provide name</string>
     <string name="empty_mobile_num" translatable="false">Please provide mobile number</string>
     <string name="empty_first_name" translatable="false">Please provide first name</string>
     <string name="empty_last_name" translatable="false">Please provide last name</string>
@@ -60,9 +62,12 @@
     <string name="empty_confirm_password" translatable="false">Please provide confirm password</string>
     <string name="empty_otp" translatable="false">Please provide OTP</string>
     <string name="empty_email" translatable="false">Please provide email address</string>
+    <string name="empty_number" translatable="false">Please provide number</string>
     <string name="empty_pincode" translatable="false">Please provide pin code</string>
 
     <string name="invalid_email" translatable="false">Please provide valid email address</string>
+    <string name="invalid_name" translatable="false">Please provide valid name</string>
+    <string name="invalid_url" translatable="false">Please provide valid url</string>
     <string name="invalid_otp" translatable="false">Please provide valid OTP</string>
     <string name="invalid_accept_tc" translatable="false">Please accept terms and conditions</string>
     <string name="invalid_conf_pwd" translatable="false">Password and confirm password must be same</string>
@@ -73,6 +78,7 @@
     <string name="invalid_last_name" translatable="false">Last name must contains text only</string>
     <string name="invalid_first_name" translatable="false">First name must contains text only</string>
     <string name="invalid_mobile_num" translatable="false">Please provide valid mobile number</string>
+    <string name="invalid_number" translatable="false">Please provide valid number</string>
     <string name="invalid_pincode" translatable="false">Please provide valid pin code</string>
 
     <string name="must_login" translatable="false">You must login to continue</string>

@@ -39,7 +39,7 @@ import java.io.File;
 
 import static com.pblibs.utility.PBConstants.*;
 
-public class PBBaseActivity extends AppCompatActivity {
+public class PBBaseActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String SCREEN_NAME = "screen";
     private static final int PERMISSION_CODE = 112;
@@ -235,37 +235,18 @@ public class PBBaseActivity extends AppCompatActivity {
     }
 
     /**
-     * To show toast message
-     *
-     * @param message
-     * @param length
-     */
-
-    public void showToast(String message, int length) {
-        Toast.makeText(mContext, message, length).show();
-    }
-
-    /**
      *
      */
 
-    public void navigateToPrevious() {
+    public void navigateToPreviousFragment() {
         ((FragmentActivity) mContext).getSupportFragmentManager().popBackStackImmediate();
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-        for (int i = 0; i < grantResults.length; i++) {
-            if (grantResults[i] == PackageManager.PERMISSION_GRANTED) {
-                isPermissionGranted = true;
-            }
-        }
-        if (!isPermissionGranted) {
-            askPermission(permissions);
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+
         }
     }
-
 }

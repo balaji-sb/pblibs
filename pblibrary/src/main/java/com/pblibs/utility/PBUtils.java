@@ -23,7 +23,9 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Build;
+import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
+import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.Patterns;
@@ -35,8 +37,10 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
 import androidx.core.content.ContextCompat;
+import androidx.core.util.PatternsCompat;
 
 
+import com.pblibrary.proggyblast.R;
 import com.pblibs.base.PBApplication;
 
 import java.net.URL;
@@ -86,21 +90,38 @@ public class PBUtils {
     }
 
     /**
+     * Check if dark theme is enabled or not
+     *
+     * @param context
+     * @return
+     */
+
+    public static boolean isDarkTheme(Context context) {
+        boolean isDarkMode = false;
+        switch (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
+            case Configuration.UI_MODE_NIGHT_YES:
+                isDarkMode = true;
+                break;
+        }
+        return isDarkMode;
+    }
+
+    /**
      * Validate Email Address
      *
      * @param email
      * @return
      */
 
-    public int validateEmail(String email) {
+    public String validateEmail(String email) {
         if (email == null || email.isEmpty()) {
-            return ZERO;
+            return mContext.getString(R.string.empty_email);
         } else {
-            Matcher lMatcher = Patterns.EMAIL_ADDRESS.matcher(email);
+            Matcher lMatcher = PatternsCompat.EMAIL_ADDRESS.matcher(email);
             if (lMatcher.matches()) {
-                return ONE;
+                return EMPTY;
             } else {
-                return TWO;
+                return mContext.getString(R.string.invalid_email);
             }
         }
     }
@@ -112,15 +133,55 @@ public class PBUtils {
      * @return
      */
 
-    public int validateName(String name) {
+    public String validateName(String name) {
         if (name == null || name.isEmpty()) {
-            return ZERO;
+            return mContext.getString(R.string.empty_name);
         } else {
             Matcher lMatcher = Pattern.compile(TEXT_PATTERN).matcher(name);
             if (lMatcher.matches()) {
-                return ONE;
+                return EMPTY;
             } else {
-                return TWO;
+                return mContext.getString(R.string.invalid_name);
+            }
+        }
+    }
+
+    /**
+     * Validate First Name
+     *
+     * @param firstName
+     * @return
+     */
+
+    public String validateFirstName(String firstName) {
+        if (firstName == null || firstName.isEmpty()) {
+            return mContext.getString(R.string.empty_first_name);
+        } else {
+            Matcher lMatcher = Pattern.compile(TEXT_PATTERN).matcher(firstName);
+            if (lMatcher.matches()) {
+                return EMPTY;
+            } else {
+                return mContext.getString(R.string.invalid_first_name);
+            }
+        }
+    }
+
+    /**
+     * Validate Last Name
+     *
+     * @param lastName
+     * @return
+     */
+
+    public String validateLastName(String lastName) {
+        if (lastName == null || lastName.isEmpty()) {
+            return mContext.getString(R.string.empty_last_name);
+        } else {
+            Matcher lMatcher = Pattern.compile(TEXT_PATTERN).matcher(lastName);
+            if (lMatcher.matches()) {
+                return EMPTY;
+            } else {
+                return mContext.getString(R.string.invalid_last_name);
             }
         }
     }
@@ -133,21 +194,16 @@ public class PBUtils {
      * @return
      */
 
-    public int validatePassword(String password, int length) {
+    public String validatePassword(String password, int length) {
         if (password == null || password.isEmpty()) {
-            return ZERO;
+            return mContext.getString(R.string.empty_password);
         } else {
-            try {
-                //String pwdPattern = String.format(Locale.US,PSWD_PATTERN, length);
-                Matcher lMatcher = Pattern.compile(PSWD_PATTERN).matcher(password);
-                if (lMatcher.matches()) {
-                    return ONE;
-                } else {
-                    return TWO;
-                }
-            } catch (UnknownFormatConversionException e) {
-                Log.e("Excepis", e.getConversion());
-                return ONE;
+            //String pwdPattern = String.format(Locale.US,PSWD_PATTERN, length);
+            Matcher lMatcher = Pattern.compile(PSWD_PATTERN).matcher(password);
+            if (lMatcher.matches()) {
+                return EMPTY;
+            } else {
+                return mContext.getString(R.string.invalid_pwd);
             }
         }
     }
@@ -159,19 +215,18 @@ public class PBUtils {
      * @return
      */
 
-    public int validateNumber(String text) {
+    public String validateNumber(String text) {
         if (text == null || text.isEmpty()) {
-            return ZERO;
+            return mContext.getString(R.string.empty_number);
         } else {
             Matcher lMatcher = Pattern.compile(NUM_PATTERN).matcher(text);
             if (lMatcher.matches()) {
-                return ONE;
+                return EMPTY;
             } else {
-                return TWO;
+                return mContext.getString(R.string.invalid_number);
             }
         }
     }
-
 
     /**
      * Validate Username
@@ -181,14 +236,14 @@ public class PBUtils {
      * @return
      */
 
-    public int validateUserName(String userName, int length) {
+    public String validateUserName(String userName, int length) {
         if (userName == null || userName.isEmpty()) {
-            return ZERO;
+            return mContext.getString(R.string.empty_username);
         } else {
             if (userName.trim().length() >= length) {
-                return ONE;
+                return EMPTY;
             } else {
-                return TWO;
+                return String.format(mContext.getString(R.string.invalid_username), length);
             }
         }
     }
@@ -200,15 +255,16 @@ public class PBUtils {
      * @return
      */
 
-    public int validateMobileNumber(String mobileNumber) {
+    public String validateMobileNumber(String mobileNumber) {
         if (mobileNumber == null || mobileNumber.isEmpty()) {
-            return ZERO;
+            return mContext.getString(R.string.empty_mobile_num);
         } else {
-            Matcher lMatcher = Patterns.PHONE.matcher(mobileNumber);
+            //PhoneNumberUtils.isGlobalPhoneNumber(mobileNumber)
+            Matcher lMatcher = Pattern.compile("^\\+(?:[0-9] ?){6,14}[0-9]$").matcher(mobileNumber);
             if (lMatcher.matches()) {
-                return ONE;
+                return EMPTY;
             } else {
-                return TWO;
+                return mContext.getString(R.string.invalid_mobile_num);
             }
         }
     }
@@ -220,15 +276,15 @@ public class PBUtils {
      * @return
      */
 
-    public int validateURL(String url) {
+    public String validateURL(String url) {
         if (url == null || url.isEmpty()) {
-            return ZERO;
+            return mContext.getString(R.string.empty_url);
         } else {
             Matcher lMatcher = Patterns.WEB_URL.matcher(url);
             if (lMatcher.matches()) {
-                return ONE;
+                return EMPTY;
             } else {
-                return TWO;
+                return mContext.getString(R.string.invalid_url);
             }
         }
     }
@@ -441,7 +497,6 @@ public class PBUtils {
         return UNKNOWN_ERROR;
     }
 
-
     /**
      * To check if application is in background or not
      *
@@ -609,22 +664,6 @@ public class PBUtils {
             canvas.drawBitmap(bitmap, 50f, 50f, null);
             document.finishPage(page);
         }
-    }
-
-    /**
-     * Check if dark theme is enabled or not
-     * @param context
-     * @return
-     */
-
-    public static boolean isDarkTheme(Context context) {
-        boolean isDarkMode = false;
-        switch (context.getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK) {
-            case Configuration.UI_MODE_NIGHT_YES:
-                isDarkMode = true;
-                break;
-        }
-        return isDarkMode;
     }
 
 }
