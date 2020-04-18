@@ -666,4 +666,24 @@ public class PBUtils {
         }
     }
 
+    /**
+     * to format UTC time to normal date time
+     * @param originalDate
+     * @return
+     */
+
+    public static String formatUTCTime(String originalDate,String toFormatPattern){
+        String formattedDate="";
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            SimpleDateFormat outputFormat = new SimpleDateFormat(toFormatPattern);
+            Date date = inputFormat.parse(originalDate);
+            formattedDate = outputFormat.format(date);
+            System.out.println(formattedDate);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return formattedDate;
+    }
 }

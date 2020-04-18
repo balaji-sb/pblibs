@@ -245,8 +245,12 @@ public class PBBaseActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
-
+        switch (view.getId()) {
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                break;
         }
     }
 }
