@@ -7,7 +7,7 @@ import com.pblibs.utility.PBConstants
  */
 
 
-data class ForgotPwdModel(
+data class ForgotPwdRequest(
     var userEmail: String? = PBConstants.DEFAULT,
     var mobileNumber: String? = PBConstants.DEFAULT
     )

@@ -9,7 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 
 import com.pblibs.base.PBApplication;
-import com.pblibs.pbinterfaces.NextActionCallback;
+import com.pblibs.pbinterfaces.DialogActionCallback;
 
 public class PBAlertWidgets {
 
@@ -35,7 +35,7 @@ public class PBAlertWidgets {
      */
 
     public void showAlertDialog(Context context, String title, String message, int icon, String positiveText,
-                                String negativeText, final NextActionCallback callback, int theme) {
+                                String negativeText, final DialogActionCallback callback, int theme) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context,theme);
         builder.setTitle(title);
         builder.setMessage(message);

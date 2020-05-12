@@ -3,8 +3,8 @@ package com.pblibs.pbvalidators.auth
 import android.content.Context
 import com.pblibrary.proggyblast.R
 import com.pblibs.base.PBApplication
-import com.pblibs.model.ForgotPwdModel
-import com.pblibs.model.LoginModel
+import com.pblibs.model.ForgotPwdRequest
+import com.pblibs.model.LoginRequest
 import com.pblibs.utility.PBConstants
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -34,7 +34,7 @@ class AuthValidatorTest {
     fun checkUsername() {
         `when`(mContext.getString(R.string.empty_username)).thenReturn("empty username")
         `when`(mContext.getString(R.string.invalid_username)).thenReturn("invalid username")
-        val loginModel = LoginModel()
+        val loginModel = LoginRequest()
         loginModel.username = ""
         loginModel.password = "test"
         var name = AuthValidator.validateLogin(loginModel)
@@ -48,7 +48,7 @@ class AuthValidatorTest {
     @Test
     fun checkPassword() {
         `when`(mContext.getString(R.string.empty_password)).thenReturn("empty password")
-        val loginModel = LoginModel()
+        val loginModel = LoginRequest()
         loginModel.userEmail = "sbb@gmail.com"
         loginModel.password = ""
         var name = AuthValidator.validateLogin(loginModel)
@@ -57,7 +57,7 @@ class AuthValidatorTest {
 
     @Test
     fun checkLogin() {
-        val loginModel = LoginModel()
+        val loginModel = LoginRequest()
         loginModel.userEmail = "sbb@gmail.com"
         loginModel.password = "test"
         val name = AuthValidator.validateLogin(loginModel)
@@ -68,7 +68,7 @@ class AuthValidatorTest {
     fun checkEmail() {
         `when`(mContext.getString(R.string.empty_email)).thenReturn("empty email")
         `when`(mContext.getString(R.string.invalid_email)).thenReturn("invalid email")
-        val loginModel = LoginModel()
+        val loginModel = LoginRequest()
         loginModel.userEmail = "sbb@gmail"
         loginModel.password = "test"
         var name = AuthValidator.validateLogin(loginModel)
@@ -84,7 +84,7 @@ class AuthValidatorTest {
     fun checkForgotPwdWithEmail() {
         `when`(mContext.getString(R.string.empty_email)).thenReturn("empty email")
         `when`(mContext.getString(R.string.invalid_email)).thenReturn("invalid email")
-        val forgotPwdModel = ForgotPwdModel()
+        val forgotPwdModel = ForgotPwdRequest()
         forgotPwdModel.userEmail = ""
         var name = AuthValidator.validateForgotPassword(forgotPwdModel)
         assertEquals(name, mContext.getString(R.string.empty_email))
@@ -100,7 +100,7 @@ class AuthValidatorTest {
     fun checkForgotPwdWithMobileNum() {
         `when`(mContext.getString(R.string.empty_mobile_num)).thenReturn("empty mobile num")
         `when`(mContext.getString(R.string.invalid_mobile_num)).thenReturn("invalid mobile num")
-        val forgotPwdModel = ForgotPwdModel()
+        val forgotPwdModel = ForgotPwdRequest()
         forgotPwdModel.mobileNumber = ""
         var name = AuthValidator.validateForgotPassword(forgotPwdModel)
         assertEquals(name, mContext.getString(R.string.empty_mobile_num))

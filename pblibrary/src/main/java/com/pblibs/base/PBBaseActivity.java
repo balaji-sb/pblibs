@@ -39,7 +39,7 @@ import java.io.File;
 
 import static com.pblibs.utility.PBConstants.*;
 
-public class PBBaseActivity extends AppCompatActivity implements View.OnClickListener {
+public abstract class PBBaseActivity extends AppCompatActivity implements View.OnClickListener {
 
     public static final String SCREEN_NAME = "screen";
     private static final int PERMISSION_CODE = 112;
@@ -55,6 +55,7 @@ public class PBBaseActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(getContentView());
         mContext = PBApplication.getInstance().getContext();
         mPbSessionManager = PBSessionManager.getInstance();
     }
@@ -91,12 +92,15 @@ public class PBBaseActivity extends AppCompatActivity implements View.OnClickLis
      * @param redirectClassName
      */
 
-    public void navigateActivity(String redirectClassName, boolean isNewActivity) {
+    public void navigateActivity(String redirectClassName, boolean isNewActivity, Bundle bundle) {
         try {
             Class aClass = Class.forName(mContext.getPackageName() + "." + redirectClassName.trim());
             Intent intent = new Intent(PBApplication.getInstance().getContext(), aClass);
             if (isNewActivity) {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            }
+            if (bundle != null) {
+                intent.putExtras(bundle);
             }
             PBApplication.getInstance().getContext().startActivity(intent);
         } catch (Exception e) {
@@ -253,4 +257,9 @@ public class PBBaseActivity extends AppCompatActivity implements View.OnClickLis
                 break;
         }
     }
+
+    public abstract int getContentView();
+
+    public abstract long getSplashInterval();
+
 }

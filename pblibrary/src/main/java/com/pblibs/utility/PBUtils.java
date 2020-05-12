@@ -23,6 +23,7 @@ import android.graphics.drawable.LayerDrawable;
 import android.graphics.pdf.PdfDocument;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.Settings;
 import android.telephony.PhoneNumberUtils;
 import android.telephony.TelephonyManager;
 import android.text.TextUtils;
@@ -46,6 +47,7 @@ import com.pblibs.base.PBApplication;
 import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.Security;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -104,6 +106,27 @@ public class PBUtils {
                 break;
         }
         return isDarkMode;
+    }
+
+    /**
+     * to format UTC time to normal date time
+     *
+     * @param originalDate
+     * @return
+     */
+
+    public static String formatUTCTime(String originalDate, String toFormatPattern) {
+        String formattedDate = "";
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+            SimpleDateFormat outputFormat = new SimpleDateFormat(toFormatPattern);
+            Date date = inputFormat.parse(originalDate);
+            formattedDate = outputFormat.format(date);
+            System.out.println(formattedDate);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return formattedDate;
     }
 
     /**
@@ -667,23 +690,15 @@ public class PBUtils {
     }
 
     /**
-     * to format UTC time to normal date time
-     * @param originalDate
-     * @return
+     * get common android id
      */
 
-    public static String formatUTCTime(String originalDate,String toFormatPattern){
-        String formattedDate="";
+    public String getAndroidId() {
         try {
-            SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
-            SimpleDateFormat outputFormat = new SimpleDateFormat(toFormatPattern);
-            Date date = inputFormat.parse(originalDate);
-            formattedDate = outputFormat.format(date);
-            System.out.println(formattedDate);
+            return Settings.Secure.getString(mContext.getContentResolver(), Settings.Secure.ANDROID_ID);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return EMPTY;
         }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        return formattedDate;
     }
 }

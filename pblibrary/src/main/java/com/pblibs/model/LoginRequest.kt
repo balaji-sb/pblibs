@@ -7,7 +7,7 @@ import com.pblibs.utility.PBConstants
  */
 
 
-data class LoginModel(
+data class LoginRequest(
     var userEmail: String? = PBConstants.DEFAULT,
     var password: String? = PBConstants.DEFAULT,
     var mobileNumber: String? = PBConstants.DEFAULT,

@@ -13,6 +13,7 @@ public class PBApplication extends Application {
     public static PBApplication mInstance;
     private Context mContext;
     private String mAppName;
+    private String mPackageName;
 
     public static PBApplication getInstance() {
         if (mInstance == null) {
@@ -45,5 +46,12 @@ public class PBApplication extends Application {
 
     public void setAppName(String appName) {
         this.mAppName = appName;
+    }
+
+    public String getPackageName() {
+        if(mContext!=null){
+            this.mPackageName=mContext.getPackageName();
+        }
+        return mPackageName;
     }
 }

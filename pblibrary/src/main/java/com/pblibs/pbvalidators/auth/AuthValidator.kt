@@ -3,8 +3,8 @@ package com.pblibs.pbvalidators.auth
 import android.content.Context
 import com.pblibrary.proggyblast.R
 import com.pblibs.base.PBApplication
-import com.pblibs.model.ForgotPwdModel
-import com.pblibs.model.LoginModel
+import com.pblibs.model.ForgotPwdRequest
+import com.pblibs.model.LoginRequest
 import com.pblibs.utility.PBConstants
 import com.pblibs.utility.PBUtils
 
@@ -21,23 +21,23 @@ class AuthValidator {
          * validate login
          */
 
-        fun validateLogin(loginModel: LoginModel): String {
+        fun validateLogin(loginRequest: LoginRequest): String {
             val mContext: Context = PBApplication.getInstance().context
             val mPbUtils = PBUtils()
-            val isEmailAvail = loginModel.userEmail !== PBConstants.DEFAULT
-            val isUsernameAvail = loginModel.username !== PBConstants.DEFAULT
-            val isMobileNumAvail = loginModel.mobileNumber !== PBConstants.DEFAULT
+            val isEmailAvail = loginRequest.userEmail !== PBConstants.DEFAULT
+            val isUsernameAvail = loginRequest.username !== PBConstants.DEFAULT
+            val isMobileNumAvail = loginRequest.mobileNumber !== PBConstants.DEFAULT
             var emailUsernameVal = PBConstants.EMPTY
             if (isEmailAvail)
-                emailUsernameVal = mPbUtils.validateEmail(loginModel.userEmail)
+                emailUsernameVal = mPbUtils.validateEmail(loginRequest.userEmail)
             else if (isUsernameAvail)
-                emailUsernameVal = mPbUtils.validateUserName(loginModel.username, 3)
+                emailUsernameVal = mPbUtils.validateUserName(loginRequest.username, 3)
             else if (isMobileNumAvail)
-                emailUsernameVal = mPbUtils.validateMobileNumber(loginModel.mobileNumber)
+                emailUsernameVal = mPbUtils.validateMobileNumber(loginRequest.mobileNumber)
 
             if (emailUsernameVal != PBConstants.EMPTY) {
                 return emailUsernameVal
-            } else if (loginModel.password!!.trim().length == 0) {
+            } else if (loginRequest.password!!.trim().length == 0) {
                 return mContext.getString(R.string.empty_password);
             }
             return emailUsernameVal
@@ -47,15 +47,15 @@ class AuthValidator {
          * validate forgot password
          */
 
-        fun validateForgotPassword(forgotPwdModel: ForgotPwdModel): String {
+        fun validateForgotPassword(forgotPwdRequest: ForgotPwdRequest): String {
             val mPbUtils = PBUtils()
-            val isEmailAvail = forgotPwdModel.userEmail !== PBConstants.DEFAULT
-            val isMobileNumAvail = forgotPwdModel.mobileNumber !== PBConstants.DEFAULT
+            val isEmailAvail = forgotPwdRequest.userEmail !== PBConstants.DEFAULT
+            val isMobileNumAvail = forgotPwdRequest.mobileNumber !== PBConstants.DEFAULT
             var emailUsernameVal = PBConstants.EMPTY
             if (isEmailAvail)
-                emailUsernameVal = mPbUtils.validateEmail(forgotPwdModel.userEmail)
+                emailUsernameVal = mPbUtils.validateEmail(forgotPwdRequest.userEmail)
             else if (isMobileNumAvail)
-                emailUsernameVal = mPbUtils.validateMobileNumber(forgotPwdModel.mobileNumber)
+                emailUsernameVal = mPbUtils.validateMobileNumber(forgotPwdRequest.mobileNumber)
             return emailUsernameVal
         }
 

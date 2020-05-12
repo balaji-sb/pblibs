@@ -20,7 +20,7 @@ public class PBConstants {
     public static final String TYPE_JSON = ".json";
     public static final String PROVIDER = ".provider";
     public static final String PUB_DOWNLOADS = "content://downloads/public_downloads";
-    public static final long SPLASH_INTERVAL = 1500;
+    //public static final long SPLASH_INTERVAL = 1500;
     public static final String PREF_NAME = PBApplication.getInstance().getContext().getPackageName();
     public static final int ZERO = 0;
     public static final int PRIVATE_MODE = 0;
@@ -54,8 +54,11 @@ public class PBConstants {
     public static final String USER_ID = "user_id";
     public static final String LATITUDE = "latitude";
     public static final String LONGITUDE = "longitude";
+    public static final String BEARER = "Bearer ";
 
     private PBConstants() {
         //do nothing
     }
+
+
 }

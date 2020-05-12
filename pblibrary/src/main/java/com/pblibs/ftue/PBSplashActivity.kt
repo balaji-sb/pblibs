@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.View
 import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
 import com.pblibrary.proggyblast.R
 import com.pblibs.base.PBApplication
 import com.pblibs.base.PBBaseActivity
@@ -43,9 +44,15 @@ open class PBSplashActivity : PBBaseActivity() {
      * to set logo and name of the splash page
      */
 
-    protected fun setSplashContent(name: String, image: Int) {
-        logoImg.setImageResource(image)
-        logoTitle.setText(name)
+    protected fun setSplashContent(name: String, image: Int?) {
+        try {
+            val bgImage = image ?: R.drawable.fallback_logo
+            logoImg.setImageResource(bgImage)
+            logoTitle.setText(name)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+            logoImg.setImageResource(R.drawable.fallback_logo)
+        }
     }
 
     /**
@@ -61,13 +68,39 @@ open class PBSplashActivity : PBBaseActivity() {
     }
 
     /**
+     * set splash drawable background
+     */
+
+    protected fun setSplashBgDrawable(resource: Int) {
+        try {
+            splash_root_constraint.setBackgroundResource(resource)
+        } catch (ex: Exception) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
+     * set splash color background
+     */
+
+    protected fun setSplashBgColor(color: Int) {
+        try {
+            splash_root_constraint.setBackgroundColor(ContextCompat.getColor(mContext, color));
+        } catch (ex: Exception) {
+            ex.printStackTrace();
+        }
+    }
+
+    /**
      * to set the redirect activity from splash page
      */
 
-    protected fun setRedirectActivity(className: String,
+    protected fun setRedirectActivity(
+        className: String,
         splashDuration: Long,
         checkPermission: Boolean,
-        lpermissions: Array<String>) {
+        lpermissions: Array<String>
+    ) {
         isCheckPermission = checkPermission
         if (isCheckPermission && !lpermissions.isNullOrEmpty()) {
             permissions = lpermissions

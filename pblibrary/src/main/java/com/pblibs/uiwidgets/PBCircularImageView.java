@@ -1,4 +1,4 @@
-package com.pblibs.utility;
+package com.pblibs.uiwidgets;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
