@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.activity_splash.*
  */
 
 
-open class PBSplashActivity : PBBaseActivity() {
+open abstract class PBSplashActivity : PBBaseActivity() {
 
     private lateinit var handler: Handler
     private lateinit var redirectClassName: String
@@ -28,7 +28,7 @@ open class PBSplashActivity : PBBaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         PBApplication.getInstance().context = this@PBSplashActivity
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash)
+//        setContentView(R.layout.activity_splash)
         initValues()
     }
 
@@ -123,7 +123,7 @@ open class PBSplashActivity : PBBaseActivity() {
      */
 
     private fun launchRedirectPage() {
-        navigateActivity(redirectClassName, true)
+        navigateActivity(redirectClassName, true,null)
     }
 
 

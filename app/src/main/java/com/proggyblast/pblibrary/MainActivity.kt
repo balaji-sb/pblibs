@@ -1,13 +1,22 @@
 package com.proggyblast.pblibrary
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.pblibs.base.PBBaseActivity
+import com.pblibs.ftue.PBSplashActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : PBSplashActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setSplashContent(getText(R.string.app_name).toString(), R.drawable.fallback_logo)
+        //setRedirectActivity("view.auth.SignInActivity", PBConstants.SPLASH_INTERVAL, true, newpermissions)
+        //setContentView(R.layout.activity_main)
+    }
+
+    override fun getSplashInterval(): Long {
+        return 2000L
+    }
+
+    override fun getContentView(): Int {
+        return R.layout.activity_main
     }
 }
