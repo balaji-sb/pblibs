@@ -160,4 +160,6 @@ open abstract class PBSplashActivity : PBBaseActivity() {
         } else askPermission(permissions)
     }
 
+    abstract fun getSplashInterval(): Long
+
 }

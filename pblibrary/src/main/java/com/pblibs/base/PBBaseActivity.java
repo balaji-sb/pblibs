@@ -260,6 +260,4 @@ public abstract class PBBaseActivity extends AppCompatActivity implements View.O
 
     public abstract int getContentView();
 
-    public abstract long getSplashInterval();
-
 }
